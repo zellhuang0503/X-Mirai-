@@ -11,6 +11,9 @@ function scrollToSection(sectionId) {
 
 // 等待 DOM 載入完成
 document.addEventListener('DOMContentLoaded', function() {
+    // 初始化影片優化
+    initVideoOptimization();
+    
     // 載入動畫
     const loadingScreen = document.getElementById('loading-screen');
     
@@ -203,3 +206,83 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 });
+
+// 影片優化功能
+function initVideoOptimization() {
+    const video = document.querySelector('.hero-video');
+    
+    if (video) {
+        // 檢查使用者偏好設定
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        if (prefersReducedMotion) {
+            video.style.display = 'none';
+            // 顯示備用背景圖片
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.style.backgroundImage = 'url("assets/openart-image_rHMC1ZkR_1752389710507_raw.jpg")';
+                heroSection.style.backgroundSize = 'cover';
+                heroSection.style.backgroundPosition = 'center';
+            }
+            return;
+        }
+        
+        // 影片載入優化
+        video.addEventListener('loadstart', function() {
+            console.log('影片開始載入');
+        });
+        
+        video.addEventListener('canplay', function() {
+            console.log('影片可以播放');
+            this.style.opacity = '1';
+        });
+        
+        video.addEventListener('error', function() {
+            console.error('影片載入失敗，顯示備用背景');
+            this.style.display = 'none';
+            // 顯示備用背景圖片
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.style.backgroundImage = 'url("assets/openart-image_rHMC1ZkR_1752389710507_raw.jpg")';
+                heroSection.style.backgroundSize = 'cover';
+                heroSection.style.backgroundPosition = 'center';
+            }
+        });
+        
+        // 當頁面不可見時暫停影片
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                video.pause();
+            } else {
+                video.play().catch(e => console.log('影片自動播放被阻止'));
+            }
+        });
+    }
+}
+
+// 效能監控
+if (window.performance && window.performance.timing) {
+    window.addEventListener('load', function() {
+        const timing = window.performance.timing;
+        const loadTime = timing.loadEventEnd - timing.navigationStart;
+        console.log(`頁面載入時間: ${loadTime}ms`);
+        
+        // 如果載入時間過長，提供建議
+        if (loadTime > 3000) {
+            console.warn('頁面載入時間較長，建議優化圖片和影片檔案大小');
+        }
+    });
+}
+
+// 錯誤處理
+window.addEventListener('error', function(e) {
+    console.error('發生錯誤:', e.error);
+});
+
+// 導出功能供其他腳本使用
+window.XMirai = {
+    scrollToSection,
+    initVideoOptimization
+};
+
+console.log('X-Mirai 未來島網站功能已載入完成');

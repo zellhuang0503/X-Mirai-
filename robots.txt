@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://yourusername.github.io/Test_Site/sitemap.xml
+
+# Disallow crawling of large media files to save bandwidth
+Disallow: /assets/*.mp4
+Disallow: /assets/*.mov
+Disallow: /assets/*.avi
+
+# Allow crawling of images
+Allow: /assets/*.jpg
+Allow: /assets/*.jpeg
+Allow: /assets/*.png
+Allow: /assets/*.gif
+Allow: /assets/*.svg
+Allow: /assets/*.webp
