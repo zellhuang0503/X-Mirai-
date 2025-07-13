@@ -7,9 +7,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 載入畫面 -->
+    <div class="loading-screen" id="loading-screen">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">載入中...</div>
+        </div>
+    </div>
+    
+    <!-- 滾動進度條 -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+    
     <header>
         <div class="header-container">
-            <h1 class="logo">X-Mirai 未來島</h1>
+            <div class="logo">
+                <h1>X-Mirai 未來島</h1>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#home">首頁</a></li>
@@ -18,13 +31,13 @@
                     <li><a href="#community">島嶼社群</a></li>
                 </ul>
             </nav>
-            <button id="theme-toggle">🌙</button>
+            <button id="theme-toggle" aria-label="切換主題">🌙</button>
         </div>
     </header>
 
     <main>
         <!-- 首頁區塊 -->
-        <section id="home" class="hero-section">
+        <section id="home" class="hero-section fade-in">
             <div class="hero-content">
                 <h1 class="hero-title">重啟人生的下半場</h1>
                 <p class="hero-subtitle">為「壯世代」量身打造的慢活旅讀新體驗，在島嶼間，重新發現生活的熱情與節奏。</p>
@@ -36,28 +49,28 @@
         </section>
 
         <!-- 未來島宇宙區塊 -->
-        <section id="universe" class="universe-section">
+        <section id="universe" class="universe-section fade-in">
             <div class="container">
                 <h2>未來島宇宙</h2>
                 <p class="section-intro">我們不只建造小屋，更建構一種全新的生活哲學。融合東方「六藝」文化與西方慢活精神，在每一座獨一無二的島嶼上，體驗療癒、啟發、探索與共鳴。</p>
                 
                 <div class="experience-grid">
-                    <div class="experience-item healing">
+                    <div class="experience-item healing fade-in">
                         <div class="experience-icon">🍃</div>
                         <h3>療癒</h3>
                         <p>在自然的懷抱中，找回內心的平靜與和諧</p>
                     </div>
-                    <div class="experience-item inspired">
+                    <div class="experience-item inspired fade-in">
                         <div class="experience-icon">💡</div>
                         <h3>啟發</h3>
                         <p>透過學習與創作，點燃生命的新火花</p>
                     </div>
-                    <div class="experience-item exploring">
+                    <div class="experience-item exploring fade-in">
                         <div class="experience-icon">🔭</div>
                         <h3>探索</h3>
                         <p>發現未知的美好，拓展人生的可能性</p>
                     </div>
-                    <div class="experience-item resonating">
+                    <div class="experience-item resonating fade-in">
                         <div class="experience-icon">🎵</div>
                         <h3>共鳴</h3>
                         <p>與志同道合的夥伴，共創美好回憶</p>
@@ -67,27 +80,27 @@
         </section>
 
         <!-- 主題活動區塊 -->
-        <section id="events" class="events-section">
+        <section id="events" class="events-section fade-in">
             <div class="container">
                 <h2>主題活動</h2>
                 <p class="section-intro">每一座島，都是一場獨特的策展。我們從在地文化汲取靈感，打造沉浸式的主題體驗。</p>
                 
                 <div class="events-grid">
-                    <div class="event-card">
+                    <div class="event-card fade-in">
                         <div class="event-image">🐉</div>
                         <div class="event-status current">現正啟動</div>
                         <h3>彰化鹿港｜龍舟未來島</h3>
                         <p>在古老的鹿港小鎮，體驗傳統龍舟文化與現代慢活精神的完美融合。</p>
                         <button class="event-btn">了解更多</button>
                     </div>
-                    <div class="event-card">
+                    <div class="event-card fade-in">
                         <div class="event-image">🌸</div>
                         <div class="event-status upcoming">即將登場</div>
                         <h3>阿里山｜茶香未來島</h3>
                         <p>在雲霧繚繞的茶園中，學習茶道文化，享受山林間的寧靜時光。</p>
                         <button class="event-btn">了解更多</button>
                     </div>
-                    <div class="event-card">
+                    <div class="event-card fade-in">
                         <div class="event-image">🎨</div>
                         <div class="event-status planning">未來規劃</div>
                         <h3>花蓮｜藝術未來島</h3>
@@ -99,7 +112,7 @@
         </section>
 
         <!-- 島嶼社群區塊 -->
-        <section id="community" class="community-section">
+        <section id="community" class="community-section fade-in">
             <div class="container">
                 <h2>在未來島，遇見知音</h2>
                 <p class="section-intro">一個人的精彩，不如一群人的未來。我們打造的不僅是旅程，更是一個溫暖、互助、共享的社群。</p>

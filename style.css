@@ -11,6 +11,72 @@ body {
     color: #333;
     background-color: #fafafa;
     scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* 載入動畫 */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0075C2 0%, #4A90C2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top: 3px solid #F8B62A;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* 滾動進度條 */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, #F8B62A, #0075C2);
+    z-index: 1001;
+    transition: width 0.1s ease;
+}
+
+/* 淡入動畫 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .container {
@@ -145,7 +211,7 @@ h2 {
 }
 
 .cta-button {
-    background: #F8B62A;
+    background: linear-gradient(45deg, #F8B62A, #e6a625);
     color: #333;
     border: none;
     padding: 1rem 2rem;
@@ -153,14 +219,35 @@ h2 {
     font-weight: bold;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(248, 182, 42, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
 }
 
 .cta-button:hover {
-    background: #e6a625;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(248, 182, 42, 0.4);
+    background: linear-gradient(45deg, #e6a625, #d4951f);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(248, 182, 42, 0.4);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:active {
+    transform: translateY(-1px) scale(1.02);
 }
 
 .hero-image {
@@ -191,12 +278,41 @@ h2 {
     text-align: center;
     padding: 2rem;
     border-radius: 15px;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
     background: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.experience-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
 }
 
 .experience-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.experience-item:hover::before {
+    left: 100%;
+}
+
+.experience-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.experience-item:hover .experience-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .experience-icon {
@@ -249,14 +365,44 @@ h2 {
     border-radius: 15px;
     padding: 2rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.event-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(0,117,194,0.1) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    border-color: #0075C2;
+}
+
+.event-card:hover::after {
+    opacity: 1;
+}
+
+.event-image {
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-image {
+    transform: scale(1.1);
 }
 
 .event-image {
@@ -533,4 +679,86 @@ body.dark-mode #email-input {
 
 body.dark-mode #theme-toggle {
     background: rgba(248, 182, 42, 0.2);
+}
+
+/* 回到頂部按鈕 */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #0075C2, #4A90C2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 117, 194, 0.3);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: linear-gradient(45deg, #005a94, #3a7ba2);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 117, 194, 0.4);
+}
+
+/* 通知系統 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 10000;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    max-width: 350px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification.success {
+    background: linear-gradient(45deg, #28a745, #20c997);
+}
+
+.notification.error {
+    background: linear-gradient(45deg, #dc3545, #e74c3c);
+}
+
+.notification.warning {
+    background: linear-gradient(45deg, #ffc107, #fd7e14);
+    color: #333;
+}
+
+.notification.info {
+    background: linear-gradient(45deg, #17a2b8, #0075C2);
+}
+
+/* 暗模式下的回到頂部按鈕 */
+body.dark-mode .back-to-top {
+    background: linear-gradient(45deg, #F8B62A, #e6a625);
+    color: #333;
+}
+
+body.dark-mode .back-to-top:hover {
+    background: linear-gradient(45deg, #e6a625, #d4951f);
 }
